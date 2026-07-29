@@ -14,9 +14,9 @@ public class ConfigWindow() : Window("EzMiniCactpot", new Vector2(400.0f, 500.0f
 	}
 
 	private static void DrawAnimationConfig() {
-		ImGuiTweaks.Header("Animations");
+		ImGuiTweaks.Header("動畫");
 
-		if (ImGui.Checkbox("Enable Animations", ref Service.Config.EnableAnimations)) {
+		if (ImGui.Checkbox("啟用動畫", ref Service.Config.EnableAnimations)) {
 			if (Service.Config.EnableAnimations) {
 				Service.AddonController.EnableAnimations();
 			}
@@ -27,7 +27,7 @@ public class ConfigWindow() : Window("EzMiniCactpot", new Vector2(400.0f, 500.0f
 	}
 	
 	private void DrawIconConfig() {
-		ImGuiTweaks.Header("Icon");
+		ImGuiTweaks.Header("圖示");
 
 		if (ImGuiTweaks.GameIconButton(Service.TextureProvider, 61332)) {
 			Service.Config.IconId = 61332;
@@ -51,7 +51,7 @@ public class ConfigWindow() : Window("EzMiniCactpot", new Vector2(400.0f, 500.0f
 		ImGui.Spacing();
 		
 		ImGui.AlignTextToFramePadding();
-		ImGui.Text("IconId:");
+		ImGui.Text("圖示 ID：");
 		
 		ImGui.SameLine();
 		
@@ -63,13 +63,13 @@ public class ConfigWindow() : Window("EzMiniCactpot", new Vector2(400.0f, 500.0f
 	}
 	
 	private void DrawColorConfig() {
-		ImGuiTweaks.Header("Colors");
+		ImGuiTweaks.Header("顏色");
 
-		if (ImGui.ColorEdit4("Button Colors", ref Service.Config.ButtonColor, ImGuiColorEditFlags.AlphaPreviewHalf)) {
+		if (ImGui.ColorEdit4("按鈕顏色", ref Service.Config.ButtonColor, ImGuiColorEditFlags.AlphaPreviewHalf)) {
 			UpdateColors();
 		}
 
-		if (ImGui.ColorEdit4("Lane Colors", ref Service.Config.LaneColor, ImGuiColorEditFlags.AlphaPreviewHalf)) {
+		if (ImGui.ColorEdit4("路線顏色", ref Service.Config.LaneColor, ImGuiColorEditFlags.AlphaPreviewHalf)) {
 			UpdateColors();
 		}
 	}

@@ -1,6 +1,6 @@
 author: daemitus, MidoriKami
 name: ezMiniCactpot
-punchline: Shows the next best move in Mini Cactpot.
-description: This plugin highlights tiles and lines in MiniCactpot that represent the best potential action you can take.
+punchline: 顯示仙人微彩的最佳下一步。
+description: 在仙人微彩中醒目標示最有利的方格與連線。
 repo_url: https://github.com/cycleapple/EzMiniCactpot
 AcceptsFeedback: false
