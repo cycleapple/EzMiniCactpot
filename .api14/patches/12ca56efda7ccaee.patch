@@ -1,0 +1,93 @@
+diff --git a/KamiToolKit.csproj b/KamiToolKit.csproj
+index 16e392b..b556403 100644
+--- a/KamiToolKit.csproj
++++ b/KamiToolKit.csproj
+@@ -1,4 +1,4 @@
+-<Project Sdk="Dalamud.NET.Sdk/13.1.0">
++<Project Sdk="Dalamud.NET.Sdk/14.0.1">
+     <PropertyGroup>
+         <Use_DalamudPackager>false</Use_DalamudPackager>
+         <LangVersion>preview</LangVersion>
+diff --git a/Nodes/Image/ImageNode.cs b/Nodes/Image/ImageNode.cs
+index 8ac66fd..d5fa191 100644
+--- a/Nodes/Image/ImageNode.cs
++++ b/Nodes/Image/ImageNode.cs
+@@ -1,4 +1,4 @@
+-﻿using FFXIVClientStructs.FFXIV.Component.GUI;
++using FFXIVClientStructs.FFXIV.Component.GUI;
+ using KamiToolKit.Classes;
+ using KamiToolKit.NodeParts;
+ using KamiToolKit.System;
+@@ -27,7 +27,7 @@ public unsafe class ImageNode : NodeBase<AtkImageNode> {
+ 
+     public ImageNodeFlags ImageNodeFlags {
+         get => (ImageNodeFlags)Node->Flags;
+-        set => Node->Flags = (byte)value;
++        set => Node->Flags = (FFXIVClientStructs.FFXIV.Component.GUI.ImageNodeFlags)value;
+     }
+ 
+     protected override void Dispose(bool disposing) {
+diff --git a/Nodes/InputText/TextInputNode.cs b/Nodes/InputText/TextInputNode.cs
+index d6e8dd1..167539d 100644
+--- a/Nodes/InputText/TextInputNode.cs
++++ b/Nodes/InputText/TextInputNode.cs
+@@ -1,4 +1,4 @@
+-﻿using System;
++using System;
+ using System.Drawing;
+ using System.Numerics;
+ using System.Runtime.InteropServices;
+@@ -166,12 +166,12 @@ public unsafe class TextInputNode : ComponentNode<AtkComponentTextInput, AtkUldC
+     }
+ 
+     public SeString SeString {
+-        get => SeString.Parse(Component->UnkText1);
++        get => SeString.Parse(Component->EvaluatedString);
+         set => Component->SetText(value.ToString());
+     }
+ 
+     public string String {
+-        get => Component->UnkText1.ToString();
++        get => Component->EvaluatedString.ToString();
+         set => Component->SetText(value);
+     }
+ 
+@@ -198,7 +198,7 @@ public unsafe class TextInputNode : ComponentNode<AtkComponentTextInput, AtkUldC
+         originalFunction(listener, numEvents);
+ 
+         try {
+-            OnInputReceived?.Invoke(SeString.Parse(Component->UnkText1));
++            OnInputReceived?.Invoke(SeString.Parse(Component->EvaluatedString));
+         }
+         catch (Exception e) {
+             Log.Exception(e);
+@@ -214,7 +214,7 @@ public unsafe class TextInputNode : ComponentNode<AtkComponentTextInput, AtkUldC
+     }
+ 
+     private void InputComplete(AddonEventData data)
+-        => OnInputComplete?.Invoke(SeString.Parse(Component->UnkText1));
++        => OnInputComplete?.Invoke(SeString.Parse(Component->EvaluatedString));
+ 
+     protected override void OnSizeChanged() {
+         base.OnSizeChanged();
+diff --git a/packages.lock.json b/packages.lock.json
+index 5b48637..0fc543d 100644
+--- a/packages.lock.json
++++ b/packages.lock.json
+@@ -1,12 +1,12 @@
+ {
+   "version": 1,
+   "dependencies": {
+-    "net9.0-windows7.0": {
++    "net10.0-windows7.0": {
+       "DotNet.ReproducibleBuilds": {
+         "type": "Direct",
+-        "requested": "[1.2.25, )",
+-        "resolved": "1.2.25",
+-        "contentHash": "xCXiw7BCxHJ8pF6wPepRUddlh2dlQlbr81gXA72hdk4FLHkKXas7EH/n+fk5UCA/YfMqG1Z6XaPiUjDbUNBUzg=="
++        "requested": "[1.2.39, )",
++        "resolved": "1.2.39",
++        "contentHash": "fcFN01tDTIQqDuTwr1jUQK/geofiwjG5DycJQOnC72i1SsLAk1ELe+apBOuZ11UMQG8YKFZG1FgvjZPbqHyatg=="
+       },
+       "SixLabors.ImageSharp": {
+         "type": "Direct",
